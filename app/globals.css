@@ -1,0 +1,225 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: dark;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  margin: 0;
+  overflow-x: hidden;
+  cursor: none;
+}
+
+/* Hide the native cursor only when the custom cursor is active (pointer devices) */
+@media (hover: none), (pointer: coarse) {
+  body {
+    cursor: auto;
+  }
+}
+
+@layer components {
+  .container-grid {
+    @apply mx-auto w-full max-w-[1600px] px-6 sm:px-10 lg:px-16;
+  }
+
+  .section-label {
+    @apply font-pixel text-[11px] uppercase tracking-[0.08em] text-silver-dim;
+  }
+
+  .hairline {
+    @apply h-px w-full bg-line;
+  }
+
+  .link-underline {
+    @apply relative inline-block;
+  }
+  .link-underline::after {
+    content: "";
+    @apply absolute -bottom-0.5 left-0 h-px w-full origin-right scale-x-0 transition-transform duration-500 ease-smooth;
+    background-color: var(--accent, #e94f0b);
+  }
+  .link-underline:hover::after {
+    @apply origin-left scale-x-100;
+  }
+
+  .accent-text {
+    color: var(--accent, #e94f0b);
+  }
+  .accent-bg {
+    background-color: var(--accent, #e94f0b);
+  }
+  .accent-border {
+    border-color: var(--accent, #e94f0b);
+  }
+
+  /* A little chip used for tags / badges */
+  .chip {
+    @apply inline-flex items-center border border-line px-2.5 py-1 font-mono text-[0.7rem] uppercase tracking-wider text-paper-dim transition-colors;
+  }
+}
+
+/* ---------- CRT scanline backdrop ---------- */
+.bg-scanlines {
+  background-image: repeating-linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0.018) 0px,
+    rgba(255, 255, 255, 0.018) 1px,
+    transparent 1px,
+    transparent 3px
+  );
+}
+
+/* pixelated dot texture for skill-tree nodes */
+.bg-pixel {
+  background-image:
+    linear-gradient(rgba(201, 205, 214, 0.04) 2px, transparent 2px),
+    linear-gradient(90deg, rgba(201, 205, 214, 0.04) 2px, transparent 2px);
+  background-size: 6px 6px;
+}
+
+/* ---------- bone-white sheen (kept subtle, on-palette) ---------- */
+.text-chrome {
+  background-image: linear-gradient(
+    100deg,
+    #9ca3af 0%,
+    #f1f1f1 28%,
+    #ffffff 42%,
+    #cfb3d4 56%,
+    #f1f1f1 72%,
+    #9ca3af 100%
+  );
+  background-size: 220% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+
+/* ---------- CRT monitor screen ---------- */
+.crt-screen {
+  position: relative;
+  background:
+    radial-gradient(120% 120% at 50% 50%, rgba(207, 179, 212, 0.05) 0%, transparent 60%),
+    #050505;
+}
+.crt-screen::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: repeating-linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0.045) 0px,
+    rgba(255, 255, 255, 0.045) 1px,
+    transparent 1px,
+    transparent 3px
+  );
+  mix-blend-mode: overlay;
+}
+.crt-screen::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  /* vignette + slight CRT curvature shading */
+  box-shadow: inset 0 0 120px 24px rgba(0, 0, 0, 0.85);
+  border-radius: inherit;
+}
+.crt-flicker {
+  animation: crt-flicker 4.5s infinite steps(60);
+}
+@keyframes crt-flicker {
+  0%, 96%, 100% { opacity: 1; }
+  97% { opacity: 0.82; }
+  98% { opacity: 0.96; }
+  99% { opacity: 0.88; }
+}
+@keyframes power-on {
+  0% { transform: scaleY(0.004) scaleX(1); opacity: 0; filter: brightness(4); }
+  8% { transform: scaleY(0.01) scaleX(1.02); opacity: 1; filter: brightness(3); }
+  30% { transform: scaleY(1) scaleX(1); filter: brightness(1.6); }
+  100% { transform: scaleY(1) scaleX(1); filter: brightness(1); }
+}
+.power-on {
+  animation: power-on 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
+  transform-origin: center;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .crt-flicker,
+  .power-on {
+    animation: none !important;
+  }
+}
+
+/* notched 8-bit / pixel corners for skill-tree nodes */
+.pixel-corners {
+  clip-path: polygon(
+    0 7px, 7px 7px, 7px 0,
+    calc(100% - 7px) 0, calc(100% - 7px) 7px, 100% 7px,
+    100% calc(100% - 7px), calc(100% - 7px) calc(100% - 7px), calc(100% - 7px) 100%,
+    7px 100%, 7px calc(100% - 7px), 0 calc(100% - 7px)
+  );
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .text-chrome,
+  .animate-chrome-shift {
+    animation: none !important;
+  }
+}
+
+/* Film grain overlay */
+.grain {
+  position: fixed;
+  inset: -200%;
+  width: 400%;
+  height: 400%;
+  pointer-events: none;
+  z-index: 90;
+  opacity: 0.05;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  animation: grain 0.6s steps(2) infinite;
+}
+
+@keyframes grain {
+  0%, 100% { transform: translate(0, 0); }
+  25% { transform: translate(-3%, 2%); }
+  50% { transform: translate(2%, -3%); }
+  75% { transform: translate(-2%, -2%); }
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #050505;
+}
+::-webkit-scrollbar-thumb {
+  background: #262626;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #e94f0b;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
