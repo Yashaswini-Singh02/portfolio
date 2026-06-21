@@ -23,9 +23,8 @@ export const profile = {
 
 export const stats = [
   { value: "11×", label: "Hackathon wins" },
-  { value: "9.3", label: "B.Tech CGPA" },
   { value: "600+", label: "Traders served" },
-  { value: "3+", label: "Years shipping" },
+  { value: "2+", label: "Years shipping" },
 ];
 
 export const socials = [
