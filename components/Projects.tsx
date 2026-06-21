@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { projects } from "@/data/content";
 
@@ -168,13 +168,37 @@ function Card({
 }
 
 function ProjectMedia({ project: p }: { project: Project }) {
-  const [failed, setFailed] = useState(false);
-  const showImage = p.image && !failed;
+  const slides =
+    p.gallery && p.gallery.length > 0
+      ? p.gallery
+      : p.image
+      ? [{ src: p.image, caption: undefined as string | undefined }]
+      : [];
+
+  const [active, setActive] = useState(0);
+  const [paused, setPaused] = useState(false);
+  const [failed, setFailed] = useState<Record<number, boolean>>({});
+
+  const hasGallery = slides.length > 1;
+
+  useEffect(() => {
+    if (!hasGallery || paused) return;
+    const id = setInterval(() => {
+      setActive((prev) => (prev + 1) % slides.length);
+    }, 2000);
+    return () => clearInterval(id);
+  }, [hasGallery, paused, slides.length]);
+
+  const caption = slides[active]?.caption;
 
   return (
-    <div className="relative h-full w-full overflow-hidden bg-ink">
+    <div
+      className="relative h-full w-full overflow-hidden bg-ink"
+      onMouseEnter={() => setPaused(true)}
+      onMouseLeave={() => setPaused(false)}
+    >
       {/* browser chrome */}
-      <div className="absolute inset-x-0 top-0 z-10 flex items-center gap-3 bg-ink/70 px-4 py-2.5 backdrop-blur-sm">
+      <div className="absolute inset-x-0 top-0 z-20 flex items-center gap-3 bg-ink/70 px-4 py-2.5 backdrop-blur-sm">
         <span className="flex items-center gap-1.5">
           <span className="h-2.5 w-2.5 rounded-full bg-accent" />
           <span className="h-2.5 w-2.5 rounded-full bg-lilac" />
@@ -184,18 +208,60 @@ function ProjectMedia({ project: p }: { project: Project }) {
           <span className="text-paper-dim/50">https://</span>
           {p.domain}
         </span>
+        {hasGallery && (
+          <span className="ml-auto font-mono text-[10px] tabular-nums text-paper-dim/70">
+            {String(active + 1).padStart(2, "0")}/{String(slides.length).padStart(2, "0")}
+          </span>
+        )}
       </div>
 
-      {showImage ? (
-        // eslint-disable-next-line @next/next/no-img-element
-        <img
-          src={p.image}
-          alt={`${p.name} preview`}
-          onError={() => setFailed(true)}
-          className="h-full w-full object-cover transition-transform duration-700 ease-smooth group-hover:scale-[1.04]"
-        />
+      {slides.length > 0 ? (
+        <>
+          {slides.map((slide, idx) =>
+            failed[idx] ? null : (
+              <img
+                key={slide.src}
+                src={slide.src}
+                alt={`${p.name} — ${slide.caption ?? "preview"}`}
+                onError={() => setFailed((f) => ({ ...f, [idx]: true }))}
+                className={`absolute inset-0 h-full w-full object-cover transition-[opacity,transform] duration-700 ease-smooth group-hover:scale-[1.04] ${
+                  idx === active ? "opacity-100" : "opacity-0"
+                }`}
+              />
+            )
+          )}
+
+          <div className="pointer-events-none absolute inset-x-0 bottom-0 z-10 h-24 bg-gradient-to-t from-ink/85 to-transparent" />
+
+          {caption && (
+            <span className="absolute bottom-4 left-4 z-10 font-pixel text-[9px] uppercase tracking-[0.1em] text-paper/80">
+              {caption}
+            </span>
+          )}
+
+          {hasGallery && (
+            <div className="absolute bottom-4 right-4 z-10 flex items-center gap-2">
+              {slides.map((slide, idx) => (
+                <button
+                  key={slide.src}
+                  type="button"
+                  aria-label={`Show ${slide.caption ?? `slide ${idx + 1}`}`}
+                  onClick={() => setActive(idx)}
+                  className="group/dot p-1"
+                >
+                  <span
+                    className="block h-1.5 rounded-full transition-all duration-300"
+                    style={{
+                      width: idx === active ? 18 : 6,
+                      background: idx === active ? p.accent : "rgba(255,255,255,0.35)",
+                    }}
+                  />
+                </button>
+              ))}
+            </div>
+          )}
+        </>
       ) : (
-        // branded placeholder until a real asset is dropped in /public/projects
         <div
           className="bg-scanlines relative flex h-full w-full items-center justify-center overflow-hidden"
           style={{ background: p.accent }}

@@ -161,6 +161,8 @@ export type Project = {
   accent: string;
   // drop screenshots/assets here — falls back to a branded screen until then
   image?: string;
+  // multiple screenshots render as an auto-cycling gallery; each can carry a short caption
+  gallery?: { src: string; caption?: string }[];
 };
 
 export const projects: Project[] = [
@@ -179,7 +181,12 @@ export const projects: Project[] = [
     ],
     stack: ["React", "Rust", "Solana", "Hyperliquid", "Trading"],
     accent: "#E94F0B",
-    image: "/projects/trench.jpg",
+    image: "/projects/trench/trench-alpha.png",
+    gallery: [
+      { src: "/projects/trench/trench-alpha.png", caption: "alpha feed" },
+      { src: "/projects/trench/trench-radar.png", caption: "wallet radar" },
+      { src: "/projects/trench/trench-furtures.png", caption: "perps terminal" },
+    ],
   },
   {
     name: "TMB",
@@ -213,7 +220,12 @@ export const projects: Project[] = [
     ],
     stack: ["DeFi", "Supra", "Node", "React", "Web3"],
     accent: "#CFB3D4",
-    image: "/projects/atmos.jpg",
+    image: "/projects/atmos/atmos-dashboard.png",
+    gallery: [
+      { src: "/projects/atmos/atmos-dashboard.png", caption: "dashboard" },
+      { src: "/projects/atmos/atmos-swap.png", caption: "swap" },
+      { src: "/projects/atmos/atmos-tokens.png", caption: "PUMP studio" },
+    ],
   },
   {
     name: "Nibble",
