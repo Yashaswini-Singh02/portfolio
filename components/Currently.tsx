@@ -3,7 +3,7 @@ import Reveal from "./Reveal";
 
 export default function Currently() {
   return (
-    <section className="container-grid py-20 sm:py-28">
+    <section className="container-grid py-12 sm:py-16">
       <div className="relative overflow-hidden border border-line bg-ink-soft/60 p-7 sm:p-10">
         <div className="flex flex-wrap items-center justify-between gap-4">
           <span className="section-label">right now</span>
@@ -16,6 +16,10 @@ export default function Currently() {
         <h2 className="text-chrome animate-chrome-shift mt-6 max-w-3xl font-pixel text-2xl leading-tight sm:text-4xl">
           what i&apos;m up to
         </h2>
+        <p className="mt-4 max-w-xl font-mono text-xs italic leading-relaxed text-silver-dim">
+          spoiler: it&apos;s mostly thrillers. but the real cliffhanger is —{" "}
+          <span className="text-paper">what&apos;s in the resume?</span>
+        </p>
 
         <div className="mt-10 grid grid-cols-1 gap-px overflow-hidden border border-line bg-line sm:grid-cols-2 lg:grid-cols-4">
           {currently.map((c, i) => (

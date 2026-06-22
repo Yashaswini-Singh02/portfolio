@@ -3,7 +3,7 @@ import Reveal from "./Reveal";
 
 export default function About() {
   return (
-    <section id="about" className="container-grid py-24 sm:py-32">
+    <section id="about" className="container-grid py-14 sm:py-20">
       <div className="flex items-end justify-between gap-4">
         <div>
           <span className="section-label">I — who</span>

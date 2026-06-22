@@ -57,7 +57,7 @@ export default function Experience() {
   }, []);
 
   return (
-    <section id="work" className="relative py-20 sm:py-28">
+    <section id="work" className="relative py-12 sm:py-16">
       <div className="container-grid">
         <div className="flex items-end justify-between gap-4">
           <div>
@@ -89,15 +89,15 @@ export default function Experience() {
           ))}
         </div>
       ) : (
-        <div ref={wrapRef} className="relative mt-8" style={{ height: "320vh" }}>
+        <div ref={wrapRef} className="relative mt-8" style={{ height: "280vh" }}>
           <div className="sticky top-0 flex h-screen items-center justify-center overflow-hidden px-4">
             <div
-              className="relative w-full max-w-4xl"
+              className="relative w-full max-w-3xl"
               style={{ perspective: "1500px" }}
             >
               <motion.div
                 ref={cubeRef}
-                className="relative h-[76vh] max-h-[600px] w-full"
+                className="relative h-[58vh] max-h-[460px] w-full"
                 style={{ transformStyle: "preserve-3d", rotateX }}
               >
                 {featured.map((job, i) => (
@@ -112,13 +112,6 @@ export default function Experience() {
                   </div>
                 ))}
               </motion.div>
-
-              {/* roman face index */}
-              <div className="pointer-events-none absolute -left-2 top-1/2 hidden -translate-y-1/2 flex-col gap-3 sm:flex">
-                {featured.map((_, i) => (
-                  <FaceTick key={i} i={i} steps={steps} progress={scrollYProgress} />
-                ))}
-              </div>
             </div>
           </div>
         </div>
@@ -161,36 +154,11 @@ export default function Experience() {
   );
 }
 
-function FaceTick({
-  i,
-  steps,
-  progress,
-}: {
-  i: number;
-  steps: number;
-  progress: ReturnType<typeof useScroll>["scrollYProgress"];
-}) {
-  const center = steps === 0 ? 0 : i / steps;
-  const opacity = useTransform(
-    progress,
-    [center - 0.18, center, center + 0.18],
-    [0.3, 1, 0.3]
-  );
-  return (
-    <motion.span
-      style={{ opacity }}
-      className="font-pixel text-[10px] uppercase tracking-[0.1em] text-paper"
-    >
-      {ROMAN[i]}
-    </motion.span>
-  );
-}
-
 function Face({ job, index }: { job: Job; index: number }) {
   const t = THEME[job.company] ?? THEME.Covalent;
   return (
     <div
-      className="flex h-full w-full flex-col justify-between p-7 sm:p-12"
+      className="flex h-full w-full flex-col justify-between p-6 sm:p-9"
       style={{ background: t.bg, color: t.fg }}
     >
       <div
@@ -207,11 +175,11 @@ function Face({ job, index }: { job: Job; index: number }) {
         <p className="font-mono text-[10px] uppercase tracking-[0.3em]" style={{ color: t.sub }}>
           {job.archetype}
         </p>
-        <h3 className="mt-3 font-serif text-[clamp(2.4rem,7vw,5.5rem)] font-light leading-[0.88]">
+        <h3 className="mt-2 font-serif text-[clamp(2rem,5.2vw,4rem)] font-light leading-[0.9]">
           {job.company}
         </h3>
-        <div className="mt-6 h-px w-16" style={{ background: t.sub }} />
-        <ul className="mt-6 max-w-xl space-y-2.5">
+        <div className="mt-4 h-px w-16" style={{ background: t.sub }} />
+        <ul className="mt-4 max-w-xl space-y-2">
           {job.points.slice(0, 3).map((p, idx) => (
             <li key={idx} className="flex gap-3">
               <span className="mt-1.5 h-1 w-1 shrink-0 rounded-full" style={{ background: t.chip }} />

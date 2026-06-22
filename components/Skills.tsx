@@ -3,7 +3,7 @@ import Reveal from "./Reveal";
 
 export default function Skills() {
   return (
-    <section id="stack" className="container-grid py-24 sm:py-32">
+    <section id="stack" className="container-grid py-14 sm:py-20">
       <div className="flex items-end justify-between gap-4">
         <div>
           <span className="section-label">IV — how</span>

@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { projects } from "@/data/content";
+import GithubGraph from "./GithubGraph";
 
 type Project = (typeof projects)[number];
 
@@ -14,7 +15,7 @@ export default function Projects() {
   });
 
   return (
-    <section id="projects" className="relative py-24 sm:py-32">
+    <section id="projects" className="relative py-14 sm:py-20">
       <div className="container-grid">
         <div className="flex items-end justify-between gap-4">
           <div>
@@ -48,6 +49,8 @@ export default function Projects() {
           );
         })}
       </div>
+
+      <GithubGraph />
 
       <div className="container-grid">
         <p className="mt-12 font-mono text-xs text-paper-dim">
@@ -137,8 +140,8 @@ function Card({
             </ul>
           </div>
 
-          <div className="flex flex-wrap items-end justify-between gap-4">
-            <div className="flex flex-wrap gap-2">
+          <div className="flex flex-wrap items-centerimage.png justify-between gap-4">
+            <div className="flex flex-wrap gap-2 items-center">
               {p.stack.map((s) => (
                 <span
                   key={s}

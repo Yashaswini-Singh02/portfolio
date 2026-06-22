@@ -23,7 +23,6 @@ export const profile = {
 
 export const stats = [
   { value: "11×", label: "Hackathon wins" },
-  { value: "600+", label: "Traders served" },
   { value: "2+", label: "Years shipping" },
 ];
 
@@ -31,7 +30,7 @@ export const socials = [
   { label: "GitHub", handle: "Yashaswini-Singh02", href: "https://github.com/Yashaswini-Singh02" },
   { label: "LinkedIn", handle: "yashaswini-singh-shaktawat", href: "https://www.linkedin.com/in/yashaswini-singh-shaktawat/" },
   { label: "X / Twitter", handle: "@yashaswini_s_s", href: "https://x.com/yashaswini_s_s" },
-  { label: "Devfolio", handle: "@YS9", href: "https://devfolio.co/@YS9/projects" },
+  // { label: "Devfolio", handle: "@YS9", href: "https://devfolio.co/@YS9/projects" },
 ];
 
 export type Experience = {
@@ -144,8 +143,8 @@ export const experience: Experience[] = [
 
 export const currently = [
   { label: "Building", value: "multi-chain trading terminals" },
-  { label: "Watching", value: "way too many K-dramas (no regrets)" },
-  { label: "Exploring", value: "a brand-new L1 almost every week" },
+  { label: "Watching", value: "binge-watching series — from murder thrillers to rom-coms to cult classics" },
+  { label: "Exploring", value: "perps, prediction markets & new trading strategies" },
   { label: "Fueled by", value: "chai + hackathon adrenaline" },
 ];
 
@@ -179,7 +178,7 @@ export const projects: Project[] = [
       "Sub-second routing for spot and perpetual positions",
       "Scalable transaction-building layer behind the terminal",
     ],
-    stack: ["React", "Rust", "Solana", "Hyperliquid", "Trading"],
+    stack: ["Next", "Solana", "Hyperliquid", "Trading" , "Express"],
     accent: "#E94F0B",
     image: "/projects/trench/trench-alpha.png",
     gallery: [
@@ -199,11 +198,15 @@ export const projects: Project[] = [
     points: [
       "End-to-end prediction market implementation",
       "Real-time market dynamics and conviction-based UX",
-      "Production infra at Covalent scale",
     ],
-    stack: ["Prediction", "Web3", "React", "Node"],
+    stack: ["Prediction", "Web3", "React", "Node","Polymarket"],
     accent: "#E50083",
-    image: "/projects/tmb.jpg",
+    image: "/projects/tmb/tmb-home.JPG",
+    gallery: [
+      { src: "/projects/tmb/tmb-home.JPG", caption: "home" },
+      { src: "/projects/tmb/tmb-match-markets.JPG", caption: "match markets" },
+      { src: "/projects/tmb/tmb-match-roaster.JPG", caption: "match roster" },
+    ],
   },
   {
     name: "Atmos",
@@ -212,7 +215,7 @@ export const projects: Project[] = [
     meta: ["2025", "live", "freelance"],
     tagline:
       "Social-driven gamified DeFi on Supra — swap, liquidity pools, the PUMP token studio, and rewards.",
-    role: "freelance full-stack — entire backend + frontend integration",
+    role: "freelance full-stack — entire frontend + backend integration",
     points: [
       "Built backend architecture for the DEX, Hyper AMM, and token-launch flows",
       "Integrated frontend for swap, staking, liquidity, and PUMP tooling",
@@ -227,23 +230,23 @@ export const projects: Project[] = [
       { src: "/projects/atmos/atmos-tokens.png", caption: "PUMP studio" },
     ],
   },
-  {
-    name: "Nibble",
-    domain: "nibble.fun",
-    href: "https://devnet.nibble.fun/discover",
-    meta: ["2026", "devnet"],
-    tagline:
-      "A social launch venue where liquidity never dies — dead-token liquidity is pooled and redistributed into active runners.",
-    role: "product + frontend",
-    points: [
-      "Social launch venue where communities form, publish, and earn dividends around tokens",
-      "Liquidity from inactive tokens is removed, pooled & redistributed — automatically and verifiably",
-      "Community co-governance: token direction decided by consensus, not a single creator",
-    ],
-    stack: ["Web3", "Social", "DeFi", "React"],
-    accent: "#E94F0B",
-    image: "/projects/nibble.jpg",
-  },
+  // {
+  //   name: "Nibble",
+  //   domain: "nibble.fun",
+  //   href: "https://devnet.nibble.fun/discover",
+  //   meta: ["2026", "devnet"],
+  //   tagline:
+  //     "A social launch venue where liquidity never dies — dead-token liquidity is pooled and redistributed into active runners.",
+  //   role: "product + frontend",
+  //   points: [
+  //     "Social launch venue where communities form, publish, and earn dividends around tokens",
+  //     "Liquidity from inactive tokens is removed, pooled & redistributed — automatically and verifiably",
+  //     "Community co-governance: token direction decided by consensus, not a single creator",
+  //   ],
+  //   stack: ["Web3", "Social", "DeFi", "React"],
+  //   accent: "#E94F0B",
+  //   image: "/projects/nibble.jpg",
+  // },
 ];
 
 export type Award = {

@@ -302,14 +302,14 @@ export default function Hero() {
             {...anim(fade(0.68))}
             className="font-sans text-lg leading-snug text-paper md:col-span-6 md:text-xl"
           >
-            {/* Full-stack engineer building fast interfaces and{" "}
+            Full-stack engineer building fast interfaces and{" "}
             <span className="text-accent">on-chain logic</span> — prediction markets, DeFi,
             and trading terminals, shipped at speed.
-            */}
-              I&apos;m a full-stack engineer who lives at the intersection of{" "}
+           
+              {/* I&apos;m a full-stack engineer who lives at the intersection of{" "}
               <span className="italic accent-text">clean interfaces</span> and{" "}
               <span className="italic accent-text">on-chain logic</span>. I build fast, ship faster,
-              and obsess over the details nobody notices until they&apos;re gone.
+              and obsess over the details nobody notices until they&apos;re gone. */}
            
           </motion.p>
 
