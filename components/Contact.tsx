@@ -92,7 +92,7 @@ export default function Contact() {
           </a>
         </div>
 
-        <div className="mt-20 grid grid-cols-2 gap-px border-t border-line bg-line sm:grid-cols-3">
+        <div className="mt-20 grid grid-cols-1 gap-px border-t border-line bg-line sm:grid-cols-3">
           {socials.map((s) => (
             <a
               key={s.label}
